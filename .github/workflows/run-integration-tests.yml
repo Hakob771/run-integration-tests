@@ -17,5 +17,8 @@ jobs:
           ref: ${{ github.ref }}
         
 
-      - uses: tenhaus/get-release-or-tag@v2
-        id: tag
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 0.0.0
