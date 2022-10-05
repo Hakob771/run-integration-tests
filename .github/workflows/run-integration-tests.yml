@@ -5,9 +5,6 @@ on:
     branches:
       - dev
 
-env:
-  RC: ""
-
 jobs:
   setReleaseCandidate:
     runs-on:
@@ -16,11 +13,3 @@ jobs:
     steps:
       - name: set env
         run: ${{ github.workflow }}
-       
-  getRC:
-    runs-on:
-      - ubuntu-latest
-      
-    steps:
-      - name: get env
-        run: echo "${{ env.RC }}"
