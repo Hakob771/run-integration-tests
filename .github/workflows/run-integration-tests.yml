@@ -20,8 +20,4 @@ jobs:
         run: ls
       
       - name: Get latest Github release per branch
-        run: esim=$(git tag)
-        id: gittag
-      
-      - name: get output tag
-        run: echo $esim
+        shell: git tag
