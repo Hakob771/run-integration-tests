@@ -13,7 +13,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+      
+      - name: ls
+        run: ls
         
       - name: Get previous release tag
         id: previous-release
-        uses: actions/get-previous-release-action@v1 
+        uses: sammcoe/get-previous-release-action@v1
