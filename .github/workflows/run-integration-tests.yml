@@ -22,15 +22,3 @@ jobs:
       
       - name: Print Latest Tag
         run: echo ${{ steps.get-latest-tag.outputs.tag }}
-        
-      - name: Find Tag
-        id: tagger
-        uses: jimschubert/query-tag-action@v1
-        with:
-          exclude: '*-rc*'
-          
-          
-      - name: Show Tag
-        id: display
-        run: |
-          echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}'
