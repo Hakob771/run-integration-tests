@@ -16,7 +16,7 @@ jobs:
       
       - name: ls
         run: ls
-        
+      
       - name: Publish Latest Release
         uses: ivangabriele/publish-latest-release@v3
         env:
