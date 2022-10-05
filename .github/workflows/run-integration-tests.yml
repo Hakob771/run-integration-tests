@@ -6,15 +6,20 @@ on:
       - dev
 
 jobs:
-  test:
+  install-aws-cli:
+    runs-on: 
+      - ubuntu-latest
+    
+    steps:
+      - name: install aws-cli
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+  use-cli-aws:
     runs-on:
       - ubuntu-latest
+      
     steps:
-      - name: create file
-        run: touch file
-  test_2:
-    needs: [test]
-    runs-on: [ubuntu-latest]
-    steps:
-      - name: list file
-        run: ls .
+      - name: use cli
+        run: aws
