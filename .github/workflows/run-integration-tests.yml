@@ -1,0 +1,20 @@
+name: run integration tests
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  test:
+    runs-on:
+      - ubuntu-latest
+    steps:
+      - name: create file
+        run: touch file
+  test_2:
+    needs: [test]
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: list file
+        run: ls .
