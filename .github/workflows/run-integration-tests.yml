@@ -24,4 +24,4 @@ jobs:
         id: gittag
       
       - name: get output tag
-        run: echo ${{ steps.gittag.output }}
+        run: echo ${{ steps.gittag.outputs }}
