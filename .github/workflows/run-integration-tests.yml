@@ -16,3 +16,5 @@ jobs:
         
       - name: Get Latest Release Tag
         uses: ctrlaltdev/latest-release-json-action@v1.0.1
+        with:
+          releases: '0.1.0-rc1'
