@@ -17,6 +17,7 @@ jobs:
       - name: ls
         run: ls
         
-      - uses: ctrlaltdev/latest-release-json-action@1
-        with:
-          releases: '[...]'
+      - name: Publish Latest Release
+        uses: ivangabriele/publish-latest-release@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
