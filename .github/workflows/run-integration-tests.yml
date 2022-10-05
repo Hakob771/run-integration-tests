@@ -17,6 +17,7 @@ jobs:
       - name: ls
         run: ls
         
+      - uses: rlespinasse/github-slug-action@v4.3.0
       - name: Get previous release tag
         id: previous-release
         uses: sammcoe/get-previous-release-action@v1
