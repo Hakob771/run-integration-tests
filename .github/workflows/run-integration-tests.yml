@@ -12,7 +12,7 @@ jobs:
   setReleaseCandidate:
     runs-on:
       - ubuntu-latest
-      
+    
     steps:
       - name: set env
         env:
