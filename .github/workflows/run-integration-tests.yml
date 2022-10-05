@@ -21,3 +21,7 @@ jobs:
       
       - name: Get latest Github release per branch
         run: git tag
+        id: gittag
+      
+      - name: get output tag
+        run: echo ${{ steps.gittag.output }}
