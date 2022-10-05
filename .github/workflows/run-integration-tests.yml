@@ -12,4 +12,4 @@ jobs:
     
     steps:
       - name: install aws-cli
-        run: aws --version
+        run: docker --version
