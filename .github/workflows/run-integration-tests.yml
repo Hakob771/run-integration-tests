@@ -20,8 +20,8 @@ jobs:
         run: ls
       
       - name: Get latest Github release per branch
-        run: git tag
+        run: esim=$(git tag)
         id: gittag
       
       - name: get output tag
-        run: echo ${{ steps.gittag.outputs }}
+        run: echo $esim
