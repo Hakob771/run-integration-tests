@@ -12,4 +12,4 @@ jobs:
     
     steps:
       - name: set env
-        run: echo ${{ github.workflow }}
+        run: echo ${{ github.workflow.outputs }}
