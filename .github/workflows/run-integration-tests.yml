@@ -15,8 +15,8 @@ jobs:
     
     steps:
       - name: set env
-        env:
-          RC: "esim"
+        run: ${{ github.workflow }}
+       
   getRC:
     runs-on:
       - ubuntu-latest
