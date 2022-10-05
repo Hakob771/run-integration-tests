@@ -17,6 +17,6 @@ jobs:
       - name: ls
         run: ls
         
-      - uses: ctrlaltdev/latest-release-json-action@latest
+      - uses: ctrlaltdev/latest-release-json-action@1
         with:
           releases: '[...]'
