@@ -12,7 +12,7 @@ jobs:
         
     steps:
       - name: checkout
-        run: git clone https://github.com/Hakob771run-integration-tests.git
+        run: git clone https://github.com/Hakob771/run-integration-tests.git
         
       - name: git tag
         run: cd run-integration-tests && git tag
