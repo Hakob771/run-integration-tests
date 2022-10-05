@@ -6,10 +6,13 @@ on:
       - dev
 
 jobs:
-  setReleaseCandidate:
+  run-integration-tests:
     runs-on:
       - ubuntu-latest
-    
+        
     steps:
-      - name: set env
-        run: echo ${{ github.workflow.output }}
+      - name: checkout
+        run: actions/checkout@v3
+        
+      - name: Get Latest Release Tag
+        uses: ctrlaltdev/latest-release-json-action@v1.0.1
