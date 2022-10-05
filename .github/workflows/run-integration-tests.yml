@@ -16,6 +16,9 @@ jobs:
         with:
           ref: ${{ github.ref }}
         
-
-      - uses: actions-ecosystem/action-get-latest-tag@v1
+      - name: Get Latest Tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
+      
+      - name: Print Latest Tag
+        run: echo ${{ steps.get-latest-tag.outputs.tag }}
