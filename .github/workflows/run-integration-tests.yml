@@ -17,8 +17,6 @@ jobs:
       - name: ls
         run: ls
         
-      - name: Gets latest created release info
-        id: latest_release_info
-        uses: jossef/action-latest-release-info@v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ctrlaltdev/latest-release-json-action@latest
+        with:
+          releases: '[...]'
