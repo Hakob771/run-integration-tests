@@ -16,5 +16,6 @@ jobs:
         with:
           ref: ${{ github.ref }}
         
-      - name: ls
-        run: git tag
+
+      - uses: tenhaus/get-release-or-tag@v2
+        id: tag
