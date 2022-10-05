@@ -12,12 +12,7 @@ jobs:
         
     steps:
       - name: checkout
-        uses: actions/checkout@v3
-        with:
-          ref: dev
-      
-      - name: ls
-        run: ls
-      
-      - name: Get latest Github release per branch
-        shell: git tag
+        run: git clone https://github.com/Hakob771run-integration-tests.git
+        
+      - name: git tag
+        run: cd run-integration-tests && git tag
