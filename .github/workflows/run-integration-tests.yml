@@ -15,7 +15,7 @@ jobs:
       
     steps:
       - name: set env
-        run: env.RC = "esim"
+        run: ${{ env.RC }}="esim"
   getRC:
     runs-on:
       - ubuntu-latest
