@@ -57,6 +57,11 @@ jobs:
       - get-change-prerelease-tag
     
     steps:
+      - name: Checkout Current Branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}    
+    
       - name: incremented-image-tag
         if: needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version != ''
         run: echo $IMAGE_TAG
