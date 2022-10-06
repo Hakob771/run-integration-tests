@@ -42,14 +42,12 @@ jobs:
         run: echo "${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }} ...... ${{ steps.rc_version.outputs.RC_VERSION }}"
 
       - name: Increment Previous Release Candidate Version
-        if: steps.get-latest-tag.outputs.tag != 'v0.0.0' && "${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}" != "${{ steps.rc_version.outputs.RC_VERSION }}"
+        if: steps.get-latest-tag.outputs.tag != 'v0.0.0' && "${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}" == "${{ steps.rc_version.outputs.RC_VERSION }}"
         id: incremented-release-candidate-version
         uses: christian-draeger/increment-semantic-version@1.0.2
         with:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc
-          
-
         
       - name: Create Initial Release Candidate Version
         if: steps.get-latest-tag.outputs.tag == 'v0.0.0' || 
