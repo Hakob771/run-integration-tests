@@ -33,7 +33,12 @@ jobs:
         uses: release-kit/semver@v1
         with:
           input: '${{ steps.get-latest-tag.outputs.tag }}'
-
+          
+      - name: Get rc_version From VERSION
+        if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
+        run: echo "::set-output name=RC_VERSION::$(jq -e -r .rc_version VERSION)"
+        id: rc_version
+        
       - name: print
         run: echo "${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }} ...... ${{ steps.rc_version.outputs.RC_VERSION }}"
 
@@ -45,10 +50,7 @@ jobs:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc
           
-      - name: Get rc_version From VERSION
-        if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
-        run: echo "::set-output name=RC_VERSION::$(jq -e -r .rc_version VERSION)"
-        id: rc_version
+
         
       - name: Create Initial Release Candidate Version
         if: steps.get-latest-tag.outputs.tag == 'v0.0.0' || 
