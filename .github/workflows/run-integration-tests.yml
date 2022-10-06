@@ -17,7 +17,7 @@ jobs:
           ref: ${{ github.ref }}
       
       - name: payload
-        run: echo ${{ github.event }}
+        run: echo ${{ toJson(github) }}
         
       - name: Get Latest Prerelease Tag
         uses: actions-ecosystem/action-get-latest-tag@v1
