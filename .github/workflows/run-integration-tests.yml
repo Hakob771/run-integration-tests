@@ -136,6 +136,9 @@ jobs:
           ref: ${{ github.ref }}    
     
       - name: Create PR
-        uses: gr2m/create-or-update-pull-request-action@v1
-        env:
+        uses: thomaseizinger/create-pull-request@master
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          head: ${{ github.ref }}
+          base: main
+          title: "An automatically created PR! Merging Tag"
