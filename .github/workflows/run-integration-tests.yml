@@ -32,16 +32,17 @@ jobs:
         run: echo "::set-output name=RC_VERSION::$(jq -e -r .rc_version VERSION)"
         id: rc_version
         
-      - name: print
-        run: contains('hello', 'e')
+#       - name: print
+#         run: contains('hello', 'e')
         
       - name: Increment Release Candidate
-        if: contains("${{ steps.get-latest-tag.outputs.tag }}", "${{ steps.rc_version.outputs.RC_VERSION }}") == true
-        id: increment-release-candidate
-        uses: christian-draeger/increment-semantic-version@1.0.2
-        with:
-          current-version: ${{ steps.get-latest-tag.outputs.tag }}
-          version-fragment: rc        
+        if: contains("hello", "e") == true
+        run: echo hello malmo
+#         id: increment-release-candidate
+#         uses: christian-draeger/increment-semantic-version@1.0.2
+#         with:
+#           current-version: ${{ steps.get-latest-tag.outputs.tag }}
+#           version-fragment: rc        
                 
       - name: Create Initial Release Candidate Version
         if: contains(steps.get-latest-tag.outputs.tag, steps.rc_version.outputs.RC_VERSION) == false
