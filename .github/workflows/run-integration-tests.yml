@@ -22,7 +22,7 @@ jobs:
       - name: Get Latest Prerelease Tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
-      
+    
       - name: Increment Previous Release Candidate Version
         if: steps.get-latest-tag.outputs.tag != 'v0.0.0'
         uses: christian-draeger/increment-semantic-version@1.0.2
