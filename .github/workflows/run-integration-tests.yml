@@ -26,18 +26,23 @@ jobs:
       - name: Increment Previous Release Candidate Version
         if: steps.get-latest-tag.outputs.tag != 'v0.0.0'
         uses: christian-draeger/increment-semantic-version@1.0.2
-        id: new-release-candidate-version
+        id: incremented-release-candidate-version
         with:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc
           
-      - name: Create Initial Release Candidate Version
+      - name: Get rc_version From VERSION
         if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
         run: echo "::set-output name=RC_VERSION::$(jq -e .rc_version VERSION)"
         id: rc_version
         
-      - name: Print JQ
-        run: echo ${{ steps.rc_version.outputs.RC_VERSION }}
+      - name: Create Initial Release Candidate Version
+        if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
+        id: initial-release-candidate-version
+        uses: christian-draeger/increment-semantic-version@1.0.2
+        with:
+          current-version: ${{ steps.rc_version.outputs.RC_VERSION }}
+          version-fragment: rc
 
   print-output-of-previous-job:
     runs-on:
