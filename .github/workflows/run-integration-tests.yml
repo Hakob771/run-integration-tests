@@ -29,7 +29,7 @@ jobs:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc
 
-  print-output-of-previous-job:
-    runs-on:
-      - ubuntu-latest
+#   print-output-of-previous-job:
+#     runs-on:
+#       - ubuntu-latest
       
