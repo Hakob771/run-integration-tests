@@ -24,7 +24,7 @@ jobs:
         id: get-latest-tag
       
       - name: Increment Previous Release Candidate Version
-        if: steps.get-latest-tag.outputs.tag != ''
+        if: steps.get-latest-tag.outputs.tag != 'v0.0.0'
         uses: christian-draeger/increment-semantic-version@1.0.2
         id: new-release-candidate-version
         with:
@@ -32,7 +32,7 @@ jobs:
           version-fragment: rc
           
       - name: Create Initial Release Candidate Version
-        if: steps.get-latest-tag.outputs.tag == ''
+        if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
         run: jq -e .rc_version VERSION
         id: jq
         
