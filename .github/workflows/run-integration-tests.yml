@@ -53,7 +53,7 @@ jobs:
           version-fragment: rc
 
       - name: New Release Candidate Version
-        if: steps.increment-release-candidate.outputs.next-version != ''
+        if: steps.new-release-candidate-version.outputs.next-version != ''
         run: echo "::set-output name=initial-release-candidate-version:${{ steps.new-release-candidate-version.outputs.next-version }}"
 
   build-and-push-docker-image:
