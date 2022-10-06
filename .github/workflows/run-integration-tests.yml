@@ -32,11 +32,11 @@ jobs:
         run: echo "::set-output name=RC_VERSION::$(jq -e -r .rc_version VERSION)"
         id: rc_version
         
-#       - name: print
-#         run: contains('hello', 'e')
+      - name: print
+        run: contains('hello', 'e')
         
       - name: Increment Release Candidate
-        if: contains('hello', 'e') == true
+        if: contains('hello', 'o') == true
         run: echo hello malmo
 #         id: increment-release-candidate
 #         uses: christian-draeger/increment-semantic-version@1.0.2
