@@ -32,9 +32,6 @@ jobs:
         run: echo "::set-output name=RC_VERSION::$(jq -e -r .rc_version VERSION)"
         id: rc_version
         
-      - name: print
-        run: contains('hello', 'e')
-        
       - name: Increment Release Candidate
         if: contains('hello', 'i') == true
         run: echo hello malmo
