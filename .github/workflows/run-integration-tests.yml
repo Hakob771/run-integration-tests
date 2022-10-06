@@ -15,8 +15,8 @@ jobs:
       - ubuntu-latest
   
     outputs:
-      incremented-release-candidate-version: ${{ steps.incremented-release-candidate-version.outputs.next-version }}
-      initial-release-candidate-version: ${{ steps.initial-release-candidate-version.outputs.next-version }}
+      incremented-release-candidate-version: ${{ steps.increment-release-candidate.outputs.next-version }}
+      initial-release-candidate-version: ${{ steps.new-release-candidate-version.outputs.next-version }}
     
     steps:
       - name: Checkout Current Branch
@@ -40,9 +40,9 @@ jobs:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc        
           
-      - name: Increment Release Candidate Version
-        if: steps.increment-release-candidate.outputs.next-version != ''
-        run: echo "::set-output name=incremented-release-candidate-version::${{ steps.increment-release-candidate.outputs.next-version }}"
+#       - name: Increment Release Candidate Version
+#         if: steps.increment-release-candidate.outputs.next-version != ''
+#         run: echo "::set-output name=incremented-release-candidate-version::${{ steps.increment-release-candidate.outputs.next-version }}"
         
       - name: Create Initial Release Candidate Version
         if: contains(steps.get-latest-tag.outputs.tag, steps.rc_version.outputs.RC_VERSION) == false
@@ -52,9 +52,9 @@ jobs:
           current-version: ${{ steps.rc_version.outputs.RC_VERSION }}
           version-fragment: rc
 
-      - name: New Release Candidate Version
-        if: steps.new-release-candidate-version.outputs.next-version != ''
-        run: echo "::set-output name=initial-release-candidate-version::${{ steps.new-release-candidate-version.outputs.next-version }}"
+#       - name: New Release Candidate Version
+#         if: steps.new-release-candidate-version.outputs.next-version != ''
+#         run: echo "::set-output name=initial-release-candidate-version::${{ steps.new-release-candidate-version.outputs.next-version }}"
 
   build-and-push-docker-image:
     runs-on:
