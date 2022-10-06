@@ -24,11 +24,11 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Get version
-        id: semver
-        uses: LykkeBusiness/get-semver-from-tag-action@v1.0.2
+      - name: Parse version from string
+        id: version
+        uses: release-kit/semver@v1
         with:
-            tag: "0.1.1-rc1"
+          input: '4.5.0-rc1'
 
 #       - name: Get Latest Prerelease Tag
 #         uses: actions-ecosystem/action-get-latest-tag@v1
