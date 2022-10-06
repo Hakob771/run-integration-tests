@@ -113,8 +113,8 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         if: needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version != ''
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }} .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }} .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
 
       - name: Build, tag, and push image to Amazon ECR
         if: needs.get-change-prerelease-tag.outputs.initial-release-candidate-version != ''
