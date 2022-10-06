@@ -42,7 +42,7 @@ jobs:
           
       - name: Increment Release Candidate Version
         if: steps.increment-release-candidate.outputs.next-version != ''
-        run: echo "::set-output name=incremented-release-candidate-version:${{ steps.increment-release-candidate.outputs.next-version }}"
+        run: echo "::set-output name=incremented-release-candidate-version::${{ steps.increment-release-candidate.outputs.next-version }}"
         
       - name: Create Initial Release Candidate Version
         if: contains(steps.get-latest-tag.outputs.tag, steps.rc_version.outputs.RC_VERSION) == false
@@ -54,7 +54,7 @@ jobs:
 
       - name: New Release Candidate Version
         if: steps.new-release-candidate-version.outputs.next-version != ''
-        run: echo "::set-output name=initial-release-candidate-version:${{ steps.new-release-candidate-version.outputs.next-version }}"
+        run: echo "::set-output name=initial-release-candidate-version::${{ steps.new-release-candidate-version.outputs.next-version }}"
 
   build-and-push-docker-image:
     runs-on:
