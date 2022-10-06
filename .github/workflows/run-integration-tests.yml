@@ -40,3 +40,6 @@ jobs:
     steps:
       - name: Print new-release-candidate-version
         run: echo ${{ needs.get-change-prerelease-tag.outputs.release-candidate }}
+
+      - name: jq usage
+        run: jq -e .rc_version VERSION
