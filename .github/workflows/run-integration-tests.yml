@@ -53,20 +53,12 @@ jobs:
       - get-change-prerelease-tag
       
     steps:
-      - name: print_1
-        id: mek
-        run: echo "::set-output name=print_1:$(echo ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }})"
-        
-      - name: print_2
-        id: erku
-        run: echo "::set-output name=print_2:$(echo ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }})"
-        
       - name: pr-1
-        if: steps.mek.outputs.name == ''
+        if: needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version == ''
         run: echo "datark"
         
       - name: pr-2
-        if: steps.erku.outputs.name == ''
+        if: needs.get-change-prerelease-tag.outputs.initial-release-candidate-version == ''
         run: echo "datark"
         
 #       - name: Configure AWS Credentials
