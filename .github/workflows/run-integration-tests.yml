@@ -8,6 +8,7 @@ on:
 env:
   ECR_REGISTRY: "915024619138.dkr.ecr.eu-central-1.amazonaws.com"
   ECR_REPOSITORY: "abra"
+  AWS_REGION: "eu-central-1"
 
 jobs:
   get-change-prerelease-tag:
@@ -40,11 +41,7 @@ jobs:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc        
           
-#       - name: Increment Release Candidate Version
-#         if: steps.increment-release-candidate.outputs.next-version != ''
-#         run: echo "::set-output name=incremented-release-candidate-version::${{ steps.increment-release-candidate.outputs.next-version }}"
-        
-      - name: Create Initial Release Candidate Version
+      - name: Create New Release Candidate Version
         if: contains(steps.get-latest-tag.outputs.tag, steps.rc_version.outputs.RC_VERSION) == false
         id: new-release-candidate-version
         uses: christian-draeger/increment-semantic-version@1.0.2
@@ -52,47 +49,36 @@ jobs:
           current-version: ${{ steps.rc_version.outputs.RC_VERSION }}
           version-fragment: rc
 
-#       - name: New Release Candidate Version
-#         if: steps.new-release-candidate-version.outputs.next-version != ''
-#         run: echo "::set-output name=initial-release-candidate-version::${{ steps.new-release-candidate-version.outputs.next-version }}"
-
   build-and-push-docker-image:
     runs-on:
       - ubuntu-latest
       
     needs: 
       - get-change-prerelease-tag
-      
-    steps:
-      - name: print1
-        run: echo ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
-      
-      - name: print2
-        run: echo ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
-        
-#     steps:
-#       - name: incremented-image-tag
-#         if: needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version != ''
-#         env:
-#           IMAGE_TAG: ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
-        
-#       - name: initial-image-tag
-#         if: needs.get-change-prerelease-tag.outputs.initial-release-candidate-version != ''
-#         env:
-#           IMAGE_TAG: ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
-          
-#       - name: Configure AWS Credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: eu-central-1
-          
-#       - name: Log in to Amazon ECR
-#         id: login-ecr
-#         uses: aws-actions/amazon-ecr-login@v1
 
-#       - name: Build, tag, and push image to Amazon ECR
-#         run: |
-#           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    steps:
+      - name: incremented-image-tag
+        if: needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version != ''
+        env:
+          IMAGE_TAG: ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
+        
+      - name: new-image-tag
+        if: needs.get-change-prerelease-tag.outputs.initial-release-candidate-version != ''
+        env:
+          IMAGE_TAG: ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
+          
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+          
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
