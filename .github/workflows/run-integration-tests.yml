@@ -33,11 +33,11 @@ jobs:
           
       - name: Create Initial Release Candidate Version
         if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
-        run: jq -e .rc_version VERSION
-        id: jq
+        run: echo "::set-output name=RC_VERSION::$(jq -e .rc_version VERSION)"
+        id: rc_version
         
       - name: Print JQ
-        run: echo ${{ steps.jq }}
+        run: echo ${{ steps.rc_version.outputs.RC_VERSION }}
 
   print-output-of-previous-job:
     runs-on:
