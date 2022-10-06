@@ -24,14 +24,11 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - id: get_version
-        name: Get version
-        uses: jannemattila/get-version-from-tag@v1
-
-      - name: Display version
-        run: |
-          VERSION=$(echo "${{ steps.get_version.outputs.version }}")
-          echo $VERSION
+      - name: Get version
+        id: semver
+        uses: LykkeBusiness/get-semver-from-tag-action@v1.0.2
+        with:
+            tag: "0.1.1-rc1"
 
 #       - name: Get Latest Prerelease Tag
 #         uses: actions-ecosystem/action-get-latest-tag@v1
