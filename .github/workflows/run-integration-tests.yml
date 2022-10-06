@@ -24,7 +24,7 @@ jobs:
         id: get-latest-tag
       
       - name: Increment Previous Release Candidate Version
-        if: steps.get-latest-tag.outputs.tag == ''
+        if: steps.get-latest-tag.outputs.tag != ''
         uses: christian-draeger/increment-semantic-version@1.0.2
         id: new-release-candidate-version
         with:
