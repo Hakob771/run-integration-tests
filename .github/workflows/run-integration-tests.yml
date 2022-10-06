@@ -130,6 +130,11 @@ jobs:
       - build-and-push-docker-image
       
     steps:
+      - name: Checkout Current Branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}    
+    
       - name: Create PR
         uses: funivan/github-autopr@0.2
         env:
