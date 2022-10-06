@@ -30,6 +30,12 @@ jobs:
         with:
           input: '4.5.0-rc1'
 
+      - name: print
+        run: |
+          echo "${{ steps.version.outputs.major }}"
+          echo "${{ steps.version.outputs.minor }}"
+          echo "${{ steps.version.outputs.patch }}"
+        
 #       - name: Get Latest Prerelease Tag
 #         uses: actions-ecosystem/action-get-latest-tag@v1
 #         id: get-latest-tag
