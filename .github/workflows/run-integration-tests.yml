@@ -37,7 +37,7 @@ jobs:
         id: jq
         
       - name: Print JQ
-        run: echo ${{ steps.jq.outputs }}
+        run: echo ${{ steps.jq }}
 
   print-output-of-previous-job:
     runs-on:
