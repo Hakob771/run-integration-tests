@@ -33,6 +33,9 @@ jobs:
         run: echo "::set-output name=RC_VERSION::$(jq -e -r .rc_version VERSION)"
         id: rc_version
         
+      - name: Print
+        run: echo "${{ steps.get-latest-tag.outputs.tag }} ${{ steps.rc_version.outputs.RC_VERSION }}"
+        
       - name: Increment Release Candidate
         if: contains(steps.get-latest-tag.outputs.tag, steps.rc_version.outputs.RC_VERSION) == true
         id: increment-release-candidate
@@ -88,6 +91,7 @@ jobs:
       
     needs: 
       - get-change-prerelease-tag
+      - create-prerelease
     
     steps:
       - name: Checkout Current Branch
