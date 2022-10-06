@@ -39,7 +39,11 @@ jobs:
         with:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc        
-                
+          
+      - name: Increment Release Candidate Version
+        if: steps.increment-release-candidate.outputs.next-version != ''
+        run: echo "::set-output name=incremented-release-candidate-version:${{ steps.increment-release-candidate.outputs.next-version }}"
+        
       - name: Create Initial Release Candidate Version
         if: contains(steps.get-latest-tag.outputs.tag, steps.rc_version.outputs.RC_VERSION) == false
         id: new-release-candidate-version
@@ -47,7 +51,10 @@ jobs:
         with:
           current-version: ${{ steps.rc_version.outputs.RC_VERSION }}
           version-fragment: rc
-        
+
+      - name: New Release Candidate Version
+        if: steps.increment-release-candidate.outputs.next-version != ''
+        run: echo "::set-output name=initial-release-candidate-version:${{ steps.new-release-candidate-version.outputs.next-version }}"
 
   build-and-push-docker-image:
     runs-on:
@@ -57,8 +64,11 @@ jobs:
       - get-change-prerelease-tag
       
     steps:
-      - name: print
-        run: echo ${{ needs.new-release-candidate-version.outputs.next-version }}
+      - name: print1
+        run: echo ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
+      
+      - name: print2
+        run: echo ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
         
 #     steps:
 #       - name: incremented-image-tag
