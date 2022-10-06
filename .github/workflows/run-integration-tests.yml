@@ -32,7 +32,7 @@ jobs:
 
       - name: print
         run: |
-          echo "${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.{{ steps.version.outputs.patch }}"
+          echo "${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}"
         
 #       - name: Get Latest Prerelease Tag
 #         uses: actions-ecosystem/action-get-latest-tag@v1
