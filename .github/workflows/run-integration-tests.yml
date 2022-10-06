@@ -9,7 +9,7 @@ jobs:
   get-change-prerelease-tag:
     runs-on:
       - ubuntu-latest
-    
+  
     outputs:
       incremented-release-candidate-version: ${{ steps.incremented-release-candidate-version.outputs.next-version }}
       initial-release-candidate-version: ${{ steps.initial-release-candidate-version.outputs.next-version }}
