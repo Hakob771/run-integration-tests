@@ -9,6 +9,9 @@ jobs:
   run-integration-tests:
     runs-on:
       - ubuntu-latest
+      
+    env:
+      rc: ""
   
     steps:
       - name: checkout
@@ -22,3 +25,13 @@ jobs:
       
       - name: Print Latest Tag
         run: echo ${{ steps.get-latest-tag.outputs.tag }}
+    
+      - name: create env
+        run: ${{ env.rc }}="hello"
+
+      - name: get env
+        run: echo "${{ env.rc }}"
+#      - name: Change Latest Tag
+#        uses: christian-draeger/increment-semantic-version@1.0.2
+#        with:
+#          current-version: 
