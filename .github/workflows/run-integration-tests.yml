@@ -33,7 +33,7 @@ jobs:
           
       - name: Get rc_version From VERSION
         if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
-        run: echo "::set-output name=RC_VERSION::$(jq -e .rc_version VERSION)"
+        run: echo "::set-output name=RC_VERSION::$(jq -e -r .rc_version VERSION)"
         id: rc_version
         
       - name: Create Initial Release Candidate Version
