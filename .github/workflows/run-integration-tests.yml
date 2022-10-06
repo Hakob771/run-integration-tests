@@ -34,12 +34,11 @@ jobs:
         
       - name: Increment Release Candidate
         if: contains(steps.get-latest-tag.outputs.tag, steps.rc_version.outputs.RC_VERSION) == true
-        run: echo '${{ steps.get-latest-tag.outputs.tag }} ${{ steps.rc_version.outputs.RC_VERSION }}'
-#         id: increment-release-candidate
-#         uses: christian-draeger/increment-semantic-version@1.0.2
-#         with:
-#           current-version: ${{ steps.get-latest-tag.outputs.tag }}
-#           version-fragment: rc        
+        id: increment-release-candidate
+        uses: christian-draeger/increment-semantic-version@1.0.2
+        with:
+          current-version: ${{ steps.get-latest-tag.outputs.tag }}
+          version-fragment: rc        
                 
       - name: Create Initial Release Candidate Version
         if: contains(steps.get-latest-tag.outputs.tag, steps.rc_version.outputs.RC_VERSION) == false
@@ -48,14 +47,19 @@ jobs:
         with:
           current-version: ${{ steps.rc_version.outputs.RC_VERSION }}
           version-fragment: rc
+        
 
-#   build-and-push-docker-image:
-#     runs-on:
-#       - ubuntu-latest
+  build-and-push-docker-image:
+    runs-on:
+      - ubuntu-latest
       
-#     needs: 
-#       - get-change-prerelease-tag
+    needs: 
+      - get-change-prerelease-tag
       
+    steps:
+      - name: print
+        run: echo ${{ needs.new-release-candidate-version.outputs.next-version }}
+        
 #     steps:
 #       - name: incremented-image-tag
 #         if: needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version != ''
