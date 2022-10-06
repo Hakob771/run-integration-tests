@@ -1,4 +1,4 @@
-name: run integration tests
+name: Run Integration Tests
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       release-candidate: ${{ steps.new-release-candidate-version.outputs.next-version }}
     
     steps:
-      - name: checkout
+      - name: Checkout Current Branch
         uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
@@ -23,12 +23,21 @@ jobs:
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
       
-      - name: Increment Release Candidate Version
+      - name: Increment Previous Release Candidate Version
+        if: steps.get-latest-tag.outputs.tag != ''
         uses: christian-draeger/increment-semantic-version@1.0.2
         id: new-release-candidate-version
         with:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc
+          
+      - name: Create Initial Release Candidate Version
+        if: steps.get-latest-tag.outputs.tag == ''
+        run: jq -e .rc_version VERSION
+        id: jq
+        
+      - name: Print JQ
+        run: echo ${{ steps.jq.outputs }}
 
   print-output-of-previous-job:
     runs-on:
