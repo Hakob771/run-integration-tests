@@ -27,7 +27,7 @@ jobs:
         run: echo ${{ steps.get-latest-tag.outputs.tag }}
     
       - name: create env
-        run: ${{ env.rc }}="hello"
+        run: $env.rc="hello"
 
       - name: get env
         run: echo "${{ env.rc }}"
