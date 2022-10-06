@@ -35,7 +35,6 @@ jobs:
           input: '${{ steps.get-latest-tag.outputs.tag }}'
           
       - name: Get rc_version From VERSION
-        if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
         run: echo "::set-output name=RC_VERSION::$(jq -e -r .rc_version VERSION)"
         id: rc_version
         
