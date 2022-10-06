@@ -33,7 +33,7 @@ jobs:
         id: rc_version
         
       - name: print
-        run: echo "${{ steps.get-latest-tag.outputs.tag }} ${{ steps.rc_version.outputs.RC_VERSION }}"
+        run: contains("${{ steps.get-latest-tag.outputs.tag }}", "${{ steps.rc_version.outputs.RC_VERSION }}")
         
       - name: Increment Release Candidate
         if: contains("${{ steps.get-latest-tag.outputs.tag }}", "${{ steps.rc_version.outputs.RC_VERSION }}") == true
