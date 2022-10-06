@@ -36,7 +36,7 @@ jobs:
         run: contains('hello', 'e')
         
       - name: Increment Release Candidate
-        if: contains('hello', 'o') == true
+        if: contains('hello', 'i') == true
         run: echo hello malmo
 #         id: increment-release-candidate
 #         uses: christian-draeger/increment-semantic-version@1.0.2
