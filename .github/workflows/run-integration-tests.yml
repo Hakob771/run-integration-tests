@@ -10,26 +10,33 @@ jobs:
     runs-on:
       - ubuntu-latest
     
+    outputs:
+      release-candidate: ${{ steps.new-release-candidate-version.outputs.next-version }}
+    
     steps:
       - name: checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
       
-      - name: payload
-        run: echo ${{ toJson(github.event) }}
-        
       - name: Get Latest Prerelease Tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
       
       - name: Increment Release Candidate Version
         uses: christian-draeger/increment-semantic-version@1.0.2
+        id: new-release-candidate-version
         with:
           current-version: ${{ steps.get-latest-tag.outputs.tag }}
           version-fragment: rc
 
-#   print-output-of-previous-job:
-#     runs-on:
-#       - ubuntu-latest
+  print-output-of-previous-job:
+    runs-on:
+      - ubuntu-latest
       
+    needs: 
+      - get-change-prerelease-tag
+      
+    steps:
+      - name: Print new-release-candidate-version
+        run: echo ${{ needs.get-change-prerelease-tag.outputs.release-candidate }}
