@@ -70,7 +70,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: dev-incremented
+          tag_name: ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
           release_name: ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
           prerelease: true
           
@@ -81,7 +81,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: dev-new
+          tag_name: ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
           release_name: ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
           prerelease: true
 
