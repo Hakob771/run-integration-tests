@@ -67,8 +67,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
-          release_name: Development
+          tag_name: Development
+          release_name: ${{ needs.get-change-prerelease-tag.outputs.incremented-release-candidate-version }}
           prerelease: true
           
       - name: PreRelease New Tag
@@ -78,8 +78,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
-          release_name: Development
+          tag_name: Development
+          release_name: ${{ needs.get-change-prerelease-tag.outputs.initial-release-candidate-version }}
           prerelease: true
 
   build-and-push-docker-image:
