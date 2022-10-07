@@ -26,7 +26,7 @@ jobs:
     
     steps:
       - name: Echo
-        run: echo dev
+        run: echo ${{ github.ref }}
         
       - name: Checkout Current Branch
         uses: actions/checkout@v3
