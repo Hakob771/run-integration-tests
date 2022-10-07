@@ -24,10 +24,7 @@ jobs:
       incremented-release-candidate-version: ${{ steps.increment-release-candidate.outputs.next-version }}
       initial-release-candidate-version: ${{ steps.new-release-candidate-version.outputs.next-version }}
     
-    steps:
-#       - name: Get payload
-#         run: echo ${{ github.event }}
-        
+    steps:     
       - name: Checkout Current Branch
         uses: actions/checkout@v3
         with:
