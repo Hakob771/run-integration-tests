@@ -1,9 +1,9 @@
 name: Run Integration Tests
 
 on:
-#   push:
-#     branches:
-#       - dev
+  push:
+    branches:
+      - feature
   pull_request:
     types: 
       - closed
