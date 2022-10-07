@@ -23,7 +23,7 @@ jobs:
     
     steps:
       - name: Get payload
-        run: echo ${{ toJson(github) }}
+        run: echo ${{ toJson(github.event) }}
         
 #       - name: Checkout Current Branch
 #         uses: actions/checkout@v3
