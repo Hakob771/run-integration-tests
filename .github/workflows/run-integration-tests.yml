@@ -15,7 +15,7 @@ env:
  
 jobs:
   get-change-prerelease-tag:
-    if: github.event.pull_request.base.ref == 'dev' && github.event.pull_request.merged == false
+    if: github.event.pull_request.base.ref == 'dev' && github.event.pull_request.merged == true
     
     runs-on:
       - ubuntu-latest
