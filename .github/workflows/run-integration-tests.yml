@@ -1,12 +1,13 @@
 name: Run Integration Tests
 
 on:
-  push:
-    branches:
-      - feature
   pull_request:
     types: 
       - closed
+#   push:
+#     branches:
+#       - feature
+
 env:
   ECR_REGISTRY: '915024619138.dkr.ecr.eu-central-1.amazonaws.com'
   ECR_REPOSITORY: 'abra'
@@ -15,6 +16,7 @@ env:
 jobs:
   get-change-prerelease-tag:
     if: github.event.pull_request.base.ref == 'dev' && github.event.pull_request.merged == false
+    
     runs-on:
       - ubuntu-latest
 
