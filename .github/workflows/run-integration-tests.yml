@@ -4,9 +4,9 @@ on:
   pull_request:
     types: 
       - closed
-  push:
-    branches:
-      - feature
+#   push:
+#     branches:
+#       - feature
 
 env:
   ECR_REGISTRY: '915024619138.dkr.ecr.eu-central-1.amazonaws.com'
